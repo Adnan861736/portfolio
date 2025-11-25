@@ -4,13 +4,14 @@ import ProjectDetailClient from './ProjectDetailClient';
 const basePath = process.env.NODE_ENV === 'production' ? '/portfolio' : '';
 
 // Generate static paths for all projects
-export function generateStaticParams() {
+export async function generateStaticParams() {
   return projects.map((project) => ({
     id: project.id,
   }));
 }
 
-export default function ProjectPage({ params }: { params: { id: string } }) {
+export default async function ProjectPage(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const project = projects.find((p) => p.id === params.id);
 
   if (!project) {
