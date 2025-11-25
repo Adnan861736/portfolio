@@ -2,17 +2,17 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import ProjectCard from '@/components/ProjectCard';
+import ProjectModal from '@/components/ProjectModal';
 import ScrollReveal from '@/components/ScrollReveal';
-import { projects } from '@/data/projects';
+import { projects, Project } from '@/data/projects';
 
 const basePath = process.env.NODE_ENV === 'production' ? '/portfolio' : '';
 
 export default function Home() {
-  const router = useRouter();
   const [locale, setLocale] = useState<'en' | 'ar'>('en');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   useEffect(() => {
     // Save locale to localStorage whenever it changes
@@ -28,7 +28,10 @@ export default function Home() {
   };
 
   const handleProjectClick = (projectId: string) => {
-    router.push(`${basePath}/projects/${projectId}/`);
+    const project = projects.find(p => p.id === projectId);
+    if (project) {
+      setSelectedProject(project);
+    }
   };
 
   const scrollToSection = (id: string) => {
@@ -645,6 +648,13 @@ export default function Home() {
           </p>
         </div>
       </footer>
+
+      {/* Project Modal */}
+      <ProjectModal
+        project={selectedProject}
+        onClose={() => setSelectedProject(null)}
+        locale={locale}
+      />
     </main>
   );
 }
