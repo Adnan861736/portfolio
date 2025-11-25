@@ -6,6 +6,12 @@ import Image from 'next/image';
 import ScrollReveal from '@/components/ScrollReveal';
 import { projects } from '@/data/projects';
 
+export function generateStaticParams() {
+  return projects.map((project) => ({
+    id: project.id,
+  }));
+}
+
 export default function ProjectPage() {
   const params = useParams();
   const router = useRouter();
