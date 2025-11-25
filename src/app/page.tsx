@@ -28,7 +28,7 @@ export default function Home() {
   };
 
   const handleProjectClick = (projectId: string) => {
-    router.push(`${basePath}/projects/${projectId}`);
+    router.push(`${basePath}/projects/${projectId}/`);
   };
 
   const scrollToSection = (id: string) => {
