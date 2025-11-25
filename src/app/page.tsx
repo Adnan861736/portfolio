@@ -7,6 +7,8 @@ import ProjectCard from '@/components/ProjectCard';
 import ScrollReveal from '@/components/ScrollReveal';
 import { projects } from '@/data/projects';
 
+const basePath = process.env.NODE_ENV === 'production' ? '/portfolio' : '';
+
 export default function Home() {
   const router = useRouter();
   const [locale, setLocale] = useState<'en' | 'ar'>('en');
@@ -26,7 +28,7 @@ export default function Home() {
   };
 
   const handleProjectClick = (projectId: string) => {
-    router.push(`/projects/${projectId}`);
+    router.push(`${basePath}/projects/${projectId}`);
   };
 
   const scrollToSection = (id: string) => {
@@ -68,7 +70,7 @@ export default function Home() {
             <div className="hidden md:flex items-center gap-2">
               {/* Download CV */}
               <a
-                href="/Adnan_Hlwnji_CV (1).pdf"
+                href={`${basePath}/Adnan_Hlwnji_CV (1).pdf`}
                 download
                 className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-sm font-medium"
               >
@@ -172,7 +174,7 @@ export default function Home() {
               <div className="flex flex-col gap-3 px-4 pt-4">
                 {/* Download CV */}
                 <a
-                  href="/Adnan_Hlwnji_CV (1).pdf"
+                  href={`${basePath}/Adnan_Hlwnji_CV (1).pdf`}
                   download
                   className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-sm font-medium justify-center"
                 >
@@ -217,7 +219,7 @@ export default function Home() {
             {/* Profile Image */}
             <div className="relative w-64 h-64 md:w-80 md:h-80 flex-shrink-0 rounded-full overflow-hidden border-2 border-blue-500 shadow-lg shadow-blue-500/20 animate-scale-in animate-float">
               <Image
-                src="/photo_2025-11-21_23-21-06.jpg"
+                src={`${basePath}/photo_2025-11-21_23-21-06.jpg`}
                 alt="Adnan Hlwnji"
                 fill
                 className="object-cover"
@@ -243,7 +245,7 @@ export default function Home() {
 
               <div className={`flex flex-wrap gap-4 pt-4 justify-center ${locale === 'ar' ? 'md:justify-end' : 'md:justify-start'} animate-fade-in-up animate-delay-400 animate-fill-both`}>
                 <a
-                  href="/Adnan_Hlwnji_CV (1).pdf"
+                  href={`${basePath}/Adnan_Hlwnji_CV (1).pdf`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors shadow-lg shadow-blue-600/20"
